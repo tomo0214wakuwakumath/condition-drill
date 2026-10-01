@@ -1,0 +1,12 @@
+/* SVGの高さ・縦位置・フォント寸法はMathJaxに任せる。 */
+.math{display:inline;vertical-align:baseline;white-space:normal;overflow:visible;padding:0;line-height:inherit}
+/* 文中の数式は通常の行内要素。スクロール箱や段落の余白を作らない。 */
+.math:not(.math-display)>mjx-container[jax="SVG"]{display:inline-block!important;margin:0!important;padding:0!important;width:auto!important;white-space:nowrap;text-align:initial}
+.math.math-display{display:block;max-width:100%;margin:.75em 0;overflow-x:auto;overflow-y:hidden;padding:.2em 0 .3em}
+.math.math-display>mjx-container[jax="SVG"]{display:block;margin:0!important;text-align:center}
+.math mjx-container[jax="SVG"]>svg{overflow:visible;max-width:none}
+/* 補助MathMLは読み上げに残し、視覚的に二重表示しない。 */
+.math mjx-assistive-mml{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;border:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(1px,1px,1px,1px)!important;clip-path:inset(50%)!important;white-space:nowrap!important}
+.math-notice{font-size:.9rem;color:#79501c;line-height:1.8}
+.option>span:last-child{min-width:0;overflow-wrap:anywhere}
+@media print{.math.math-display{overflow:visible}}
