@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>誕生日の実験室｜授業用</title>
+<style>
+:root{--paper:#f4f6f1;--white:#fff;--dark:#193e33;--green:#20634c;--light:#e9f3eb;--line:#d5e1d8;--muted:#62786c;--warm:#f5edda}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--dark);font-family:"Yu Gothic UI","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;font-size:16px;line-height:1.55}
+header{background:#fff;border-bottom:1px solid var(--line)}
+.top{max-width:1040px;margin:auto;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.top h1{font-size:20px;letter-spacing:.025em;margin:0;font-weight:800}.top .subhead{font-size:12px;color:var(--muted)}
+main{max-width:1040px;margin:0 auto;padding:22px 20px 48px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 3px 16px #173b2910;min-width:0}
+.card h2{margin:0 0 15px;font-size:19px}
+.select-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:10px}
+.select-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;text-align:left;cursor:pointer;transition:.15s ease;box-shadow:0 3px 16px #173b2910}
+.select-card:hover{transform:translateY(-1px);border-color:#9fc0ab}
+.select-card strong{display:block;font-size:18px;margin-bottom:8px}
+.select-card p{margin:0;color:var(--muted);font-size:14px}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px}
+.backbtn{border:1px solid #aec7b4;border-radius:9px;background:#fff;color:var(--green);padding:10px 13px;font:inherit;font-size:14px;font-weight:800;cursor:pointer}
+.mode-title{font-size:24px;font-weight:800;margin:2px 0 0}
+.layout{display:grid;grid-template-columns:minmax(290px,0.95fr) minmax(300px,1.05fr);gap:17px;align-items:start}
+label{display:block;font-size:14px;font-weight:800;margin:0 0 8px}
+.formrow{display:flex;align-items:center;gap:10px;margin:0 0 20px}
+.formrow input{width:128px;font-family:inherit;color:var(--dark);border:1px solid #b6cabb;border-radius:10px;padding:9px 11px;font-size:24px;font-weight:750;background:white}
+.fixed{font-weight:800;font-size:22px;margin:0 0 20px}
+.trials{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-bottom:20px}
+.trial{border:1px solid #c3d6c7;border-radius:10px;padding:11px 2px;background:#fff;cursor:pointer;color:var(--dark);font:inherit;font-size:14px;font-weight:750}
+.trial[aria-pressed=true]{background:var(--light);border:2px solid var(--green);padding:10px 1px}
+.primary{width:100%;border:0;border-radius:11px;background:var(--green);color:#fff;padding:14px;font:inherit;font-weight:800;font-size:17px;cursor:pointer}
+.primary:disabled{opacity:.6;cursor:wait}
+.status{color:var(--muted);font-size:13px;min-height:1.4em;margin:9px 0 0}
+.empty{border:1px dashed #bed0c1;border-radius:12px;background:#fbfcfa;color:var(--muted);display:grid;place-items:center;text-align:center;min-height:170px;padding:18px}
+.heading-result{font-size:14px;color:var(--muted);font-weight:750;margin:0 0 13px}.metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.metric{border-radius:11px;background:var(--light);padding:14px}.metric:nth-child(2){background:var(--warm)}
+.metric label{font-size:13px;margin:0 0 4px}.metric strong{display:block;font-size:clamp(27px,3.4vw,36px);line-height:1.35;letter-spacing:-.03em}.metric span{font-size:12px;color:var(--muted)}
+.classroom-first{margin:0 0 16px}.classroom-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.classroom-head h2{margin:0}.classroom-first .example-head{margin:10px 0}.below{margin-top:17px}.recordtable{border-collapse:collapse;width:100%;font-size:14px;white-space:nowrap}.recordtable th,.recordtable td{padding:10px 9px;text-align:left;border-bottom:1px solid var(--line)}.recordtable th{background:#f5f7f3;color:#4d6d5b;font-size:12px;font-weight:800}.scroll{overflow-x:auto}
+.smallbtn{border:1px solid #aec7b4;border-radius:9px;background:#fff;color:var(--green);padding:10px 13px;font:inherit;font-size:14px;font-weight:800;cursor:pointer}
+.example-head{font-weight:800;margin:16px 0 7px}.seats{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:7px}.seat{background:#f2f5f0;border:1px solid #d4ddd5;border-radius:7px;padding:7px 3px;text-align:center;min-width:0;font-size:13px;line-height:1.45}.seat small{display:block;font-size:10px;color:#62796e}.seat.pair{background:#ddefe2;border-color:#85ba99}.seat.triple{background:#ffe3ba;border-color:#d5aa65}.seat.self{outline:2px solid var(--green);outline-offset:-2px}.seat.selfmatched{background:#ffe3ba;border-color:#d5aa65}.note{color:var(--muted);font-size:12px;margin:8px 0 0}
+footer{font-size:12px;color:var(--muted);margin:18px 0 0}button:focus-visible,input:focus-visible{outline:3px solid #f1ae60;outline-offset:3px}[hidden]{display:none!important}
+@media(max-width:720px){main{padding:14px 12px 32px}.top{padding:14px 12px}.top h1{font-size:17px}.top .subhead{display:none}.layout{grid-template-columns:1fr}.card{padding:17px}.mode-title{font-size:21px}.metrics{gap:8px}.metric{padding:11px}.metric strong{font-size:29px}.seats{grid-template-columns:repeat(5,minmax(0,1fr))}.select-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="top"><h1>誕生日の実験室</h1><span class="subhead">シミュレーション</span></div></header>
+<main>
+  <section id="homeSection" class="card">
+    <h2>課題を選ぶ</h2>
+    <div class="select-grid">
+      <button class="select-card" type="button" data-mode="A"><strong>A｜何人で50％を超える？</strong><p>人数を変えながら、2人以上が同じ誕生日になる割合を調べます。</p></button>
+      <button class="select-card" type="button" data-mode="B"><strong>B｜自分と同じ誕生日の人がいる確率は？</strong><p>40人のクラスで、誰か同士の一致と自分との一致を比べます。</p></button>
+      <button class="select-card" type="button" data-mode="C"><strong>C｜3人以上が同じ誕生日になる確率は？</strong><p>40人のクラスで、2人以上の一致と3人以上の一致を比べます。</p></button>
+    </div>
+  </section>
+
+  <section id="appSection" hidden>
+    <div class="toolbar">
+      <button type="button" id="backBtn" class="backbtn">課題選択に戻る</button>
+      <div class="mode-title" id="modeTitle"></div>
+    </div>
+    <section class="card classroom-first" aria-label="架空の1クラスの様子">
+      <div class="classroom-head">
+        <h2>架空の1クラスの様子</h2>
+        <button type="button" class="smallbtn" id="sampleBtn">別のクラスを作る</button>
+      </div>
+      <div id="sample" aria-live="polite"></div>
+      <p class="note">これは1回だけ作ったクラスです。下の実験では、クラスを何度も作り直して割合を調べます。</p>
+    </section>
+    <div class="layout">
+      <section class="card setup" aria-label="実験の設定">
+        <h2>実験の設定</h2>
+        <div id="nArea"><label for="nInput">集団の人数</label><div class="formrow"><input type="number" id="nInput" min="2" max="100" value="30"><span>人</span></div></div>
+        <div id="fixedArea" hidden><label>集団の人数</label><div class="fixed">40人</div></div>
+        <label>試行回数</label>
+        <div class="trials" role="group" aria-label="試行回数">
+          <button type="button" class="trial" data-trials="10" aria-pressed="false">10回</button>
+          <button type="button" class="trial" data-trials="100" aria-pressed="true">100回</button>
+          <button type="button" class="trial" data-trials="1000" aria-pressed="false">1,000回</button>
+          <button type="button" class="trial" data-trials="10000" aria-pressed="false">10,000回</button>
+        </div>
+        <button type="button" id="runBtn" class="primary">100回 実験する</button>
+        <p class="status" id="status" role="status"></p>
+      </section>
+      <section class="card" aria-label="実験結果">
+        <h2>実験結果</h2>
+        <div id="result" aria-live="polite"></div>
+      </section>
+    </div>
+    <section class="card below"><h2>実験履歴</h2>
+      <div class="scroll"><table class="recordtable"><thead id="historyHead"></thead><tbody id="historyBody"></tbody></table></div>
+      <p id="historyEmpty" class="note">まだ履歴はありません</p>
+    </section>
+    <footer>365日・うるう年なし・各日が同じ確率で独立に生まれると仮定した実験です。</footer>
+  </section>
+</main>
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+let mode='';
+const state={A:{trials:100,records:[],result:null},B:{trials:100,records:[],result:null},C:{trials:100,records:[],result:null}};
+const maxRecords=30;
+const format=n=>Number(n).toLocaleString('ja-JP');
+const ratio=(hits,n)=>(hits*100/n).toFixed(1)+'%';
+const dates=[31,28,31,30,31,30,31,31,30,31,30,31];
+function birthday(day){let month=0;while(day>=dates[month])day-=dates[month++];return (month+1)+'/'+(day+1);}
+function oneClass(n,keep=false){
+ const frequency=new Uint16Array(365), days=keep?[]:null;
+ let any=false,triple=false,selfmatch=false,selfday=-1;
+ for(let i=0;i<n;i++){
+  const day=Math.floor(Math.random()*365);
+  if(i===0)selfday=day;
+  if(keep)days.push(day);
+  const total=++frequency[day];
+  if(total>=2)any=true;
+  if(total>=3)triple=true;
+  if(i>0&&day===selfday)selfmatch=true;
+ }
+ return {any,triple,selfmatch,days,frequency};
+}
+function runExperiment(n,t){let any=0,triple=0,selfmatch=0;
+ for(let i=0;i<t;i++){
+  const v=oneClass(n);
+  if(v.any)any++;
+  if(v.triple)triple++;
+  if(v.selfmatch)selfmatch++;
+ }
+ return {n,t,any,triple,selfmatch};
+}
+function chooseMode(next){
+ mode=next;
+ $('homeSection').hidden=true;
+ $('appSection').hidden=false;
+ const titles={A:'A｜何人で50％を超える？',B:'B｜自分と同じ誕生日の人がいる確率は？',C:'C｜3人以上が同じ誕生日になる確率は？'};
+ $('modeTitle').textContent=titles[mode];
+ $('nArea').hidden=mode!=='A';$('fixedArea').hidden=mode==='A';
+ $('sampleBtn').textContent='別のクラスを作る';
+ $('sample').replaceChildren();
+ $('status').textContent='';
+ document.querySelectorAll('.trial').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.trials)===state[mode].trials)));
+ $('runBtn').textContent=format(state[mode].trials)+'回 実験する';
+ drawResults();drawHistory();
+ drawSample();
+}
+function goHome(){ $('appSection').hidden=true; $('homeSection').hidden=false; mode=''; }
+function drawResults(){
+ const box=$('result');const r=state[mode].result;
+ if(!r){box.innerHTML='<div class="empty">実験結果はここに表示されます</div>';return;}
+ const metric=(label,hits)=>`<div class="metric"><label>${label}</label><strong>${ratio(hits,r.t)}</strong><span>${format(hits)}回 / ${format(r.t)}回</span></div>`;
+ let body='';
+ if(mode==='A')body=metric('2人以上が一致',r.any)+`<div class="metric"><label>一致しなかった割合</label><strong>${ratio(r.t-r.any,r.t)}</strong><span>${format(r.t-r.any)}回 / ${format(r.t)}回</span></div>`;
+ if(mode==='B')body=metric('誰か同士が一致',r.any)+metric('自分と誰かが一致',r.selfmatch);
+ if(mode==='C')body=metric('2人以上が一致',r.any)+metric('3人以上が一致',r.triple);
+ box.innerHTML=`<div class="heading-result">${format(r.n)}人 × ${format(r.t)}回</div><div class="metrics">${body}</div>`;
+}
+function drawHistory(){
+ const target=$('historyBody');let rows=state[mode].records;
+ $('historyEmpty').hidden=rows.length>0;
+ $('historyHead').innerHTML=mode==='A'?'<tr><th>人数</th><th>試行回数</th><th>2人以上</th></tr>':mode==='B'?'<tr><th>試行回数</th><th>誰か同士</th><th>自分と誰か</th></tr>':'<tr><th>試行回数</th><th>2人以上</th><th>3人以上</th></tr>';
+ target.innerHTML=rows.map(r=>{
+  if(mode==='A')return `<tr><td>${r.n}人</td><td>${format(r.t)}回</td><td><strong>${ratio(r.any,r.t)}</strong></td></tr>`;
+  if(mode==='B')return `<tr><td>${format(r.t)}回</td><td>${ratio(r.any,r.t)}</td><td><strong>${ratio(r.selfmatch,r.t)}</strong></td></tr>`;
+  return `<tr><td>${format(r.t)}回</td><td>${ratio(r.any,r.t)}</td><td><strong>${ratio(r.triple,r.t)}</strong></td></tr>`;
+ }).join('');
+}
+function drawSample(){
+ const n=mode==='A'?Number($('nInput').value):40;
+ if(!Number.isInteger(n)||n<2||n>100){$('status').textContent='人数は2～100人で設定してください';return;}
+ const sample=oneClass(n,true),first=sample.days[0];
+ let cells=sample.days.map((d,i)=>{
+  const f=sample.frequency[d];
+  let cls=f>=3?'triple':f>=2?'pair':'';
+  if(mode==='B'&&d===first&&sample.selfmatch)cls='selfmatched';
+  if(mode==='B'&&i===0)cls+=' self';
+  const name=mode==='B'&&i===0?'自分':(i+1)+'番';
+  return `<div class="seat ${cls}"><small>${name}</small>${birthday(d)}</div>`;
+ }).join('');
+ const label=mode==='A'?'2人以上の一致：'+(sample.any?'あり':'なし'):mode==='B'?'誰か同士：'+(sample.any?'あり':'なし')+' ／ 自分と誰か：'+(sample.selfmatch?'あり':'なし'):'2人以上：'+(sample.any?'あり':'なし')+' ／ 3人以上：'+(sample.triple?'あり':'なし');
+ $('sample').innerHTML=`<div class="example-head">${n}人のクラス ／ ${label}</div><div class="seats">${cells}</div>`;
+ $('sample').hidden=false;
+}
+function startRun(){
+ const n=mode==='A'?Number($('nInput').value):40;
+ if(!Number.isInteger(n)||n<2||n>100){$('status').textContent='人数は2～100人で設定してください';$('nInput').focus();return;}
+ $('runBtn').disabled=true;$('status').textContent='実験中…';
+ setTimeout(()=>{
+  try{
+   const r=runExperiment(n,state[mode].trials);
+   state[mode].result=r;
+   state[mode].records.unshift(r);
+   if(state[mode].records.length>maxRecords)state[mode].records.pop();
+   drawResults();drawHistory();
+   $('status').textContent='';
+  }catch(e){$('status').textContent='実験を実行できませんでした';}
+  finally{$('runBtn').disabled=false;}
+ },30);
+}
+document.querySelectorAll('.select-card').forEach(btn=>btn.addEventListener('click',()=>chooseMode(btn.dataset.mode)));
+document.querySelectorAll('.trial').forEach(btn=>btn.addEventListener('click',()=>{
+ if(!mode)return;
+ state[mode].trials=Number(btn.dataset.trials);
+ document.querySelectorAll('.trial').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));
+ $('runBtn').textContent=format(state[mode].trials)+'回 実験する';
+}));
+$('runBtn').addEventListener('click',startRun);
+$('sampleBtn').addEventListener('click',drawSample);
+$('nInput').addEventListener('change',()=>{if(mode==='A')drawSample();});
+$('backBtn').addEventListener('click',goHome);
+})();
+</script>
+</body>
+</html>
