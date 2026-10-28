@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#174b3d">
+<title>誕生日の実験室｜授業導入・教師用</title>
+<style>
+:root{--ink:#193e33;--green:#205a45;--green2:#194b3b;--cream:#f6f7ee;--paper:#fff;--line:#d8e2d5;--muted:#687d72;--soft:#eff4e8;--gold:#f2ce7a;--shadow:0 12px 32px #2143300e}
+*{box-sizing:border-box}
+html{background:var(--cream)}
+body{margin:0;color:var(--ink);background:var(--cream);font-family:"Yu Gothic UI","Hiragino Kaku Gothic ProN",Meiryo,system-ui,sans-serif;line-height:1.45;font-size:15px}
+button{font:inherit;cursor:pointer;border:1px solid #c7d7cb;border-radius:10px;padding:12px 14px;background:white;color:var(--ink);font-weight:750;transition:background .15s,transform .15s}
+button:hover{background:#e8f3e7;transform:translateY(-1px)}
+button:active{transform:translateY(0)}
+button:focus-visible{outline:3px solid #eea64a;outline-offset:3px}
+button:disabled{opacity:.5;cursor:wait}
+header{background:#fff;border-bottom:1px solid var(--line)}
+.head{max-width:1520px;margin:auto;padding:15px 26px;display:flex;align-items:center;gap:15px}
+.mark{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:#e6f2df;background:var(--green);font-size:24px;font-weight:bold}
+.brand{min-width:0}.brand h1{font-size:20px;letter-spacing:.02em;margin:0;line-height:1.3}.brand p{font-size:12px;color:var(--muted);margin:2px 0 0}
+.head-right{margin-left:auto;display:flex;gap:8px;align-items:center}.tag{padding:7px 11px;border-radius:8px;background:#eaf1e5;color:#325b42;font-size:12px;font-weight:800;white-space:nowrap}
+.mini{padding:7px 11px;font-size:12px;font-weight:700}
+main{max-width:1520px;margin:auto;padding:22px 26px 25px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,350px);gap:20px;align-items:start}
+.card{border:1px solid var(--line);border-radius:18px;background:var(--paper);box-shadow:var(--shadow)}
+.scene{padding:18px 20px 20px}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 15px;flex-wrap:wrap}
+.kicker{margin:0;font-size:12px;letter-spacing:.12em;color:#66806a;font-weight:850}.section-head h2{margin:3px 0 0;font-size:20px}
+.counter{background:#e8f2e8;border:1px solid #d7e6d8;border-radius:99px;padding:7px 13px;font-size:12px;font-weight:800;color:#315f4a}
+.classroom{border:1px solid #d7e1d8;background:linear-gradient(180deg,#f6f7ef,#eef2e9);padding:17px;border-radius:14px}
+.chalkframe{padding:8px;border:1px solid #a79a77;border-bottom:9px solid #baab8a;background:#d5c7a9;border-radius:9px;box-shadow:0 4px 8px #344c2a17}
+.board{min-height:105px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:15px 12px;text-align:center;background:radial-gradient(ellipse at 22% 26%,#2f6b56,#1c503f 65%,#174737);color:#fffdf0;border-radius:3px;box-shadow:inset 0 0 20px #082b2a55}
+.board .chalk-top{font-size:12px;font-weight:700;letter-spacing:.16em;color:#c6d7c4;margin:0 0 7px}.board .chalk-main{margin:0;font-size:clamp(17px,2.1vw,29px);font-weight:850;letter-spacing:.025em}.board .chalk-sub{font-size:14px;color:#dfefdb;margin:6px 0 0;min-height:20px;font-weight:650}
+.aisle{text-align:center;font-size:10px;color:#718574;letter-spacing:.38em;font-weight:850;margin:13px 0 8px}
+.seats{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px}
+.seat{min-height:73px;background:#fdfefb;border:1px solid #d5dfd7;border-bottom:5px solid #c3d0c5;border-radius:9px;padding:6px 4px;text-align:center;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:background .2s,border-color .2s}
+.seat .student{color:#73857a;font-size:10px;font-weight:750;letter-spacing:.01em}
+.seat .date{font-size:clamp(12px,1.2vw,17px);font-weight:850;font-variant-numeric:tabular-nums;white-space:nowrap;line-height:1.2}
+.seat .group{font-size:10px;line-height:1.15;font-weight:800;white-space:nowrap}
+.seat.empty .date{color:#b8c7bd;font-weight:600}
+.seat.matched{background:var(--match-bg);border-color:var(--match-bd);border-bottom-color:var(--match-bd)}
+.seat.matched .group{color:#2a4639}
+.class-footer{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0 0;min-height:30px}
+.chip{display:inline-flex;gap:5px;align-items:center;padding:6px 10px;border:1px solid #dbe2d7;background:#f9faf5;border-radius:8px;font-size:12px;font-weight:750}
+.chip .dot{width:9px;height:9px;border-radius:99px;background:var(--match-bd,#88a797)}
+.no-match{font-size:12px;color:var(--muted)}
+.controls{padding:19px;display:flex;flex-direction:column;gap:18px}
+.controls h2{font-size:18px;margin:0 0 8px}.controls p{margin:0;color:var(--muted);font-size:13px}
+.control-group{display:flex;flex-direction:column;gap:8px}
+.primary{border:0;background:var(--green);color:white;font-size:16px;padding:14px}
+.primary:hover{background:#174837;color:white}
+.run-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.run{background:#f3f8f0;border:1px solid #b5cebb;font-size:15px;padding:14px 8px}
+.run .small{display:block;color:#66816e;font-size:10px;margin-top:3px;font-weight:600}
+.sep{border:0;border-top:1px solid #e2e9df;margin:0}
+.metric{background:#eff5e8;border:1px solid #dce8d1;border-radius:12px;padding:14px}
+.metric .label{font-weight:750;color:#456c50;font-size:12px}
+.metric .number{font-weight:900;font-size:40px;letter-spacing:-.04em;line-height:1.1;margin:4px 0;font-variant-numeric:tabular-nums}
+.metric .detail{color:#51715e;font-size:12px;font-weight:700}
+.results-note{font-size:11px;color:var(--muted)}
+.hist-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.hist-head h3{font-size:14px;margin:0}
+.clear{font-size:11px;padding:5px 9px;background:none;color:#6c7d70}
+.history{display:flex;flex-direction:column;gap:7px;min-height:50px}
+.history-empty{color:#8b9d8f;font-size:12px;padding:15px;background:#f8faf7;border-radius:9px;text-align:center}
+.history-item{display:grid;grid-template-columns:70px 1fr 63px;gap:8px;align-items:center;font-size:12px;padding:7px 4px;border-bottom:1px solid #e9eee9}
+.history-item strong{text-align:right;font-size:15px;font-variant-numeric:tabular-nums}
+.history-item small{display:block;color:#718677;font-size:10px;margin-top:3px}
+.bar{height:8px;border-radius:6px;background:#e5ece3;overflow:hidden}
+.bar span{height:100%;display:block;background:#4b9976;border-radius:6px}
+.foot{font-size:11px;color:#6e8476;margin:14px 0 0;text-align:right}
+#liveStatus{position:absolute;width:1px;height:1px;clip:rect(0,0,0,0);overflow:hidden;white-space:nowrap}
+@media (min-width:1350px){.seat{min-height:79px}.scene{padding:24px}.classroom{padding:22px}.seats{gap:10px}}
+@media (max-width:1000px){.layout{grid-template-columns:minmax(0,1fr) 290px}.seat{min-height:65px}.scene{padding:14px}.classroom{padding:10px}.seats{gap:5px}}
+@media (max-width:800px){.layout{display:flex;flex-direction:column}.scene,.controls{width:100%}.controls{display:grid;grid-template-columns:1fr 1fr;gap:14px}.controls>.sep{display:none}.results-panel{grid-column:1/-1}.hist-wrap{grid-column:1/-1}.seats{gap:7px}.seat{min-height:71px}}
+@media (max-width:580px){.head{padding:12px 14px}.brand h1{font-size:16px}.brand p{font-size:10px}.mark{width:36px;height:36px}.head-right .tag{display:none}main{padding:12px}.scene{padding:12px}.section-head h2{font-size:18px}.classroom{padding:9px}.seats{grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}.seat{min-height:65px;padding:5px 2px}.seat .date{font-size:14px}.controls{display:flex;padding:15px}.board{min-height:90px}.board .chalk-main{font-size:19px}}
+@media print{header,.controls,.foot{display:none}main{padding:0}.layout{display:block}.scene{border:0;box-shadow:none}}
+</style>
+</head>
+<body>
+<header><div class="head"><div class="mark" aria-hidden="true">日</div><div class="brand"><h1>誕生日の実験室 <span style="font-size:12px;font-weight:600;color:#7c907f">／授業導入</span></h1><p>40人のクラスを何度も作って確かめよう</p></div><div class="head-right"><span class="tag">40人固定・365日</span><button class="mini" id="fullscreenBtn" type="button">⛶ 全画面</button></div></div></header>
+<main>
+ <div class="layout">
+  <section class="card scene" aria-label="架空の教室">
+   <div class="section-head"><div><p class="kicker">CLASSROOM</p><h2>架空の40人クラス</h2></div><span class="counter" id="sampleCount">まだ作っていません</span></div>
+   <div class="classroom">
+    <div class="chalkframe"><div class="board">
+     <p class="chalk-top">きょうの問題</p>
+     <p class="chalk-main" id="boardMain">40人のクラスに、同じ誕生日の人はいる？</p>
+     <p class="chalk-sub" id="boardSub">「1クラス作る」で確かめよう</p>
+    </div></div>
+    <div class="aisle">黒 板 側</div>
+    <div class="seats" id="seats" aria-label="40人の座席"></div>
+   </div>
+   <div class="class-footer" id="classFooter"><span class="no-match">クラスを作ると、各席に誕生日が表示されます。</span></div>
+  </section>
+  <aside class="card controls" aria-label="実験の操作と結果">
+   <div class="control-group"><div><h2>① 1クラスを見てみる</h2><p>同じ誕生日の人は見つかるかな？</p></div><button class="primary" type="button" id="createClass">1クラス作る</button></div>
+   <hr class="sep">
+   <div class="control-group"><div><h2>② 何度も実験する</h2><p>40人のクラスを何度も作り、「誰か同士の誕生日が一致したクラス」の割合を調べます。</p></div><div class="run-grid"><button class="run" type="button" data-run="100">100クラス実験<span class="small">100回</span></button><button class="run" type="button" data-run="1000">1,000クラス実験<span class="small">1,000回</span></button></div></div>
+   <div class="results-panel"><div class="metric" id="metric"><div class="label">直近の実験｜一致した割合</div><div class="number" id="lastPercent">— %</div><div class="detail" id="lastDetail">実験すると結果が表示されます</div></div><p class="results-note" style="margin-top:7px">※結果は毎回変わります。理論値は表示していません。</p></div>
+   <div class="hist-wrap"><div class="hist-head"><h3>実験結果の記録</h3><button type="button" class="clear" id="resetHistory">履歴を消す</button></div><div class="history" id="history"><div class="history-empty">まだ実験していません</div></div></div>
+  </aside>
+ </div>
+ <p class="foot">すべての誕生日が365日間で同じ確率で生まれると仮定しています（うるう日は除く）。各実験は独立です。</p>
+ <div id="liveStatus" role="status" aria-live="polite"></div>
+</main>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+const monthLengths=[31,28,31,30,31,30,31,31,30,31,30,31];
+const colors=[['#ffe4db','#e9a48e'],['#dff0ff','#88bae2'],['#fff0c8','#e2c36b'],['#e6ddff','#ac99dc'],['#ddf6e8','#89c8a8'],['#ffe1ee','#dca1b9'],['#e3f4bc','#a1bf6d'],['#dff3f5','#8abdc6']];
+const seats=$('seats');let classNumber=0;let batchNumber=0;const history=[];
+function birthday(){return Math.floor(Math.random()*365)}
+function toDate(d){let m=0;while(d>=monthLengths[m]){d-=monthLengths[m++];}return `${m+1}/${d+1}`}
+function sameDateExists(days){return new Set(days).size < days.length}
+function makeClass(){return Array.from({length:40},birthday)}
+function groupsFor(days){const map=new Map();days.forEach((d,i)=>{if(!map.has(d))map.set(d,[]);map.get(d).push(i)});return [...map.entries()].filter(x=>x[1].length>=2).sort((a,b)=>a[0]-b[0])}
+function seatEl(index,day,match){const el=document.createElement('div');el.className='seat'+(day===null?' empty':'')+(match?' matched':'');if(match){el.style.setProperty('--match-bg',match.color[0]);el.style.setProperty('--match-bd',match.color[1])}const num=document.createElement('span');num.className='student';num.textContent=`${String(index+1).padStart(2,'0')}番`;const date=document.createElement('strong');date.className='date';date.textContent=day===null?'— / —':toDate(day);const group=document.createElement('span');group.className='group';group.textContent=match?`同じ誕生日 ${match.name}`:'\u00a0';el.append(num,date,group);return el}
+function showSeats(days){const matches=new Map();const groups=days?groupsFor(days):[];groups.forEach(([day,indices],i)=>{const match={name:`G${i+1}`,color:colors[i%colors.length]};indices.forEach(index=>matches.set(index,match))});const frag=document.createDocumentFragment();for(let i=0;i<40;i++)frag.appendChild(seatEl(i,days?days[i]:null,matches.get(i)));seats.replaceChildren(frag);return groups}
+function setFooter(groups){const foot=$('classFooter');foot.replaceChildren();if(!groups.length){const span=document.createElement('span');span.className='no-match';span.textContent='このクラスには同じ誕生日の人がいませんでした。';foot.append(span);return}groups.forEach(([day,indices],i)=>{const pill=document.createElement('span');pill.className='chip';const dot=document.createElement('span');dot.className='dot';dot.style.setProperty('--match-bd',colors[i%colors.length][1]);pill.append(dot,document.createTextNode(`G${i+1}：${toDate(day)}（${indices.length}人）`));foot.append(pill)})}
+function showClass(){classNumber++;const groups=showSeats(makeClass());$('sampleCount').textContent=`${classNumber}クラス目`;const found=groups.length>0;$('boardSub').textContent=found?`このクラス：同じ誕生日のグループが${groups.length}組！`:'このクラス：同じ誕生日の人はいなかった';setFooter(groups);$('liveStatus').textContent=`${classNumber}クラス目：${found?'一致あり':'一致なし'}`}
+function showHistory(){const root=$('history');root.replaceChildren();if(history.length===0){const e=document.createElement('div');e.className='history-empty';e.textContent='まだ実験していません';root.append(e);return}for(const h of history){const row=document.createElement('div');row.className='history-item';const label=document.createElement('span');label.textContent=`${h.total.toLocaleString('ja-JP')}クラス`;const center=document.createElement('div');const bar=document.createElement('div');bar.className='bar';const fill=document.createElement('span');fill.style.width=`${h.pct}%`;bar.append(fill);const small=document.createElement('small');small.textContent=`${h.matched.toLocaleString('ja-JP')} / ${h.total.toLocaleString('ja-JP')} クラスで一致`;center.append(bar,small);const value=document.createElement('strong');value.textContent=`${h.pct.toFixed(1)}%`;row.append(label,center,value);root.append(row)}}
+function runBatch(n){let matched=0;for(let i=0;i<n;i++){if(sameDateExists(makeClass()))matched++}batchNumber++;const pct=matched/n*100;history.unshift({total:n,matched,pct});if(history.length>8)history.length=8;$('lastPercent').textContent=`${pct.toFixed(1)}%`;$('lastDetail').textContent=`${n.toLocaleString('ja-JP')}クラス中、${matched.toLocaleString('ja-JP')}クラスで一致`;showHistory();$('liveStatus').textContent=`${n}クラスの実験が終わりました。一致した割合は${pct.toFixed(1)}パーセントです。`}
+$('createClass').addEventListener('click',showClass);
+document.querySelectorAll('[data-run]').forEach(button=>button.addEventListener('click',()=>runBatch(Number(button.dataset.run))));
+$('resetHistory').addEventListener('click',()=>{history.length=0;$('lastPercent').textContent='— %';$('lastDetail').textContent='実験すると結果が表示されます';showHistory();$('liveStatus').textContent='実験履歴を消しました';});
+$('fullscreenBtn').addEventListener('click',async()=>{try{if(document.fullscreenElement){await document.exitFullscreen();return}if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();}catch(e){$('liveStatus').textContent='このブラウザでは全画面表示できません';}});
+showSeats(null);
+})();
+</script>
+</body>
+</html>
